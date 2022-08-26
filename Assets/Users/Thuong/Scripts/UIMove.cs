@@ -15,12 +15,16 @@ public class UIMove : MonoBehaviour
 
     [SerializeField] private List<GameObject> characterSpritesLeft;
     [SerializeField] private List<GameObject> characterSpritesRight;
+
+    [SerializeField] private AudioSource audioSources;
+    [SerializeField] private AudioClip[] AudioClips;
     private bool CheckLockP1;
     private bool CheckLockP2;
     private int numP1 = -1;
     private int numP2 = 0;
     private void Start()
     {
+        audioSources = GetComponent<AudioSource>();
         _wallMove[0].Play(wallIn, 0, 0.0f);
         _wallMove[1].Play(wallIn, 0, 0.0f);
         CheckLockP1 = false;
@@ -32,18 +36,22 @@ public class UIMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            audioSources.PlayOneShot(AudioClips[0], 0.8f);
             F1MoveP1();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            audioSources.PlayOneShot(AudioClips[0], 0.8f);
             F2MoveP1();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
+            audioSources.PlayOneShot(AudioClips[0], 0.8f);
             F1MoveP2();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
+            audioSources.PlayOneShot(AudioClips[0], 0.8f);
             F2MoveP2();
         }
         //--------
@@ -68,7 +76,7 @@ public class UIMove : MonoBehaviour
         void F1MoveP1() //phai
         {
             if(CheckLockP1 == false)
-            {
+            { 
                 if (numP1 == -1)
                 {
                     playerPick[0].position = posSetLab[1].position;
@@ -95,6 +103,7 @@ public class UIMove : MonoBehaviour
     {
         if (CheckLockP1 == false)
         {
+           
             if (numP1 == 2)
             {
                 numP1--;
@@ -123,6 +132,7 @@ public class UIMove : MonoBehaviour
     {
         if (CheckLockP2 == false)
         {
+            
             if (numP2 == -1)
             {
                 playerPick[1].position = posSetLab[1].position;
